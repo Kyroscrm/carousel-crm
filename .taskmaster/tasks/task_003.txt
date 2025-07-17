@@ -1,0 +1,11 @@
+# Task ID: 3
+# Title: Visual Deal Pipeline System
+# Status: pending
+# Dependencies: 1 (Not found), 2 (Not found)
+# Priority: high
+# Description: Create drag-and-drop visual pipeline with real-time updates and forecasting
+# Details:
+
+
+# Test Strategy:
+

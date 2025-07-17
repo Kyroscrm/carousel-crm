@@ -1,0 +1,11 @@
+# Task ID: 8
+# Title: AI-Powered Lead Scoring Engine
+# Status: pending
+# Dependencies: 4 (Not found), 6 (Not found)
+# Priority: medium
+# Description: Machine learning-based lead scoring with predictive analytics and recommendations
+# Details:
+
+
+# Test Strategy:
+
