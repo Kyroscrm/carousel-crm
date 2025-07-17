@@ -1,0 +1,711 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": "1",
+        "title": "Core Infrastructure & Database Setup",
+        "description": "Establish foundational architecture with Supabase database schema and security",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 8,
+        "estimatedHours": 16,
+        "category": "infrastructure",
+        "dependencies": [],
+        "tags": [
+          "database",
+          "security",
+          "infrastructure"
+        ],
+        "acceptance_criteria": [
+          "Multi-tenant database schema implemented",
+          "Row Level Security (RLS) policies configured",
+          "All core tables created with proper constraints",
+          "Database indexes optimized for performance"
+        ],
+        "implementation_details": "Create comprehensive database schema for organizations, users, contacts, companies, deals, activities, and custom fields. Implement RLS for data isolation.",
+        "test_strategy": "Unit tests for database operations, integration tests for multi-tenancy",
+        "technical_notes": "Use Supabase PostgreSQL with RLS, implement audit logging, set up backup procedures"
+      },
+      {
+        "id": "2",
+        "title": "Authentication & User Management System",
+        "description": "Implement secure authentication with Supabase Auth including MFA and role-based access",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 7,
+        "estimatedHours": 14,
+        "category": "authentication",
+        "dependencies": [
+          "1"
+        ],
+        "tags": [
+          "auth",
+          "security",
+          "users"
+        ],
+        "acceptance_criteria": [
+          "Email and OAuth authentication working",
+          "Multi-factor authentication implemented",
+          "Role-based access control functional",
+          "Password reset and account recovery"
+        ],
+        "implementation_details": "Integrate Supabase Auth with custom user profiles, implement RBAC with organization-level permissions, add MFA support",
+        "test_strategy": "Authentication flow testing, security penetration testing, role permission validation",
+        "technical_notes": "Use Supabase Auth, JWT tokens, implement session management with refresh tokens"
+      },
+      {
+        "id": "3",
+        "title": "Visual Deal Pipeline System",
+        "description": "Create drag-and-drop visual pipeline with real-time updates and forecasting",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 9,
+        "estimatedHours": 20,
+        "category": "core-feature",
+        "dependencies": [
+          "1",
+          "2"
+        ],
+        "tags": [
+          "pipeline",
+          "ui",
+          "realtime"
+        ],
+        "acceptance_criteria": [
+          "Drag-and-drop deal movement functional",
+          "Real-time updates across multiple users",
+          "Custom pipeline stages configurable",
+          "Probability-based forecasting implemented"
+        ],
+        "implementation_details": "Build Kanban-style interface using React DnD, implement Supabase realtime for live updates, create forecasting algorithms",
+        "test_strategy": "UI interaction testing, concurrent user testing, data consistency validation",
+        "technical_notes": "Use @dnd-kit for drag-and-drop, Supabase realtime for live updates, implement optimistic updates"
+      },
+      {
+        "id": "4",
+        "title": "Contact Management & 360° Profiles",
+        "description": "Comprehensive contact management with profiles, history, and relationship tracking",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 7,
+        "estimatedHours": 16,
+        "category": "core-feature",
+        "dependencies": [
+          "1",
+          "2"
+        ],
+        "tags": [
+          "contacts",
+          "profiles",
+          "data"
+        ],
+        "acceptance_criteria": [
+          "Full CRUD operations for contacts",
+          "360-degree contact view with timeline",
+          "Bulk import/export functionality",
+          "Duplicate detection and merging"
+        ],
+        "implementation_details": "Create contact database schema, implement search and filtering, build timeline component, add bulk operations",
+        "test_strategy": "Data validation testing, import/export testing, duplicate detection accuracy",
+        "technical_notes": "Use fuzzy matching for duplicates, implement pagination for large datasets"
+      },
+      {
+        "id": "5",
+        "title": "Company & Organization Management",
+        "description": "Company profiles with hierarchical relationships and advanced filtering",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 6,
+        "estimatedHours": 12,
+        "category": "core-feature",
+        "dependencies": [
+          "1",
+          "2",
+          "4"
+        ],
+        "tags": [
+          "companies",
+          "organizations",
+          "hierarchy"
+        ],
+        "acceptance_criteria": [
+          "Company CRUD operations complete",
+          "Hierarchical company relationships",
+          "Advanced search and filtering",
+          "Company-contact associations"
+        ],
+        "implementation_details": "Design company schema with parent-child relationships, implement search algorithms, create company profile views",
+        "test_strategy": "Relationship integrity testing, search performance testing",
+        "technical_notes": "Use PostgreSQL recursive queries for hierarchy, implement full-text search"
+      },
+      {
+        "id": "6",
+        "title": "Activity Tracking & Communication Hub",
+        "description": "Comprehensive activity logging with email, calls, meetings, and task management",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 8,
+        "estimatedHours": 18,
+        "category": "core-feature",
+        "dependencies": [
+          "1",
+          "2",
+          "4"
+        ],
+        "tags": [
+          "activities",
+          "communication",
+          "tasks"
+        ],
+        "acceptance_criteria": [
+          "All activity types trackable (calls, emails, meetings, tasks)",
+          "Activity timeline and history view",
+          "Email integration working",
+          "Automated follow-up sequences"
+        ],
+        "implementation_details": "Create activity schema, integrate with email APIs, build timeline UI, implement notification system",
+        "test_strategy": "Email integration testing, notification delivery testing, activity logging accuracy",
+        "technical_notes": "Integrate Gmail/Outlook APIs, use background jobs for email sync"
+      },
+      {
+        "id": "7",
+        "title": "Real-time Dashboard & Analytics",
+        "description": "Interactive dashboard with real-time metrics, KPIs, and customizable widgets",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 8,
+        "estimatedHours": 16,
+        "category": "analytics",
+        "dependencies": [
+          "3",
+          "4",
+          "6"
+        ],
+        "tags": [
+          "dashboard",
+          "analytics",
+          "realtime"
+        ],
+        "acceptance_criteria": [
+          "Customizable widget system",
+          "Real-time data updates",
+          "Performance metrics tracking",
+          "Interactive charts and graphs"
+        ],
+        "implementation_details": "Build modular widget system, implement real-time data streams, create chart components using Recharts",
+        "test_strategy": "Real-time data accuracy testing, widget customization testing, performance monitoring",
+        "technical_notes": "Use Recharts for visualizations, Supabase realtime for live data, implement caching strategies"
+      },
+      {
+        "id": "8",
+        "title": "AI-Powered Lead Scoring Engine",
+        "description": "Machine learning-based lead scoring with predictive analytics and recommendations",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 9,
+        "estimatedHours": 24,
+        "category": "ai-ml",
+        "dependencies": [
+          "4",
+          "6"
+        ],
+        "tags": [
+          "ai",
+          "ml",
+          "scoring",
+          "predictions"
+        ],
+        "acceptance_criteria": [
+          "Lead scoring algorithm with >85% accuracy",
+          "Real-time score updates",
+          "Explanation of scoring factors",
+          "Automated recommendations"
+        ],
+        "implementation_details": "Implement ML model using gradient boosting, create scoring API, build explanation interface, integrate Moonshot AI",
+        "test_strategy": "Model accuracy testing, performance benchmarking, A/B testing for recommendations",
+        "technical_notes": "Use Moonshot API for AI features, implement feature engineering pipeline, model versioning"
+      },
+      {
+        "id": "9",
+        "title": "Mobile-First Progressive Web App",
+        "description": "PWA with offline capabilities, push notifications, and mobile-optimized UX",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 8,
+        "estimatedHours": 20,
+        "category": "mobile",
+        "dependencies": [
+          "2",
+          "3",
+          "4"
+        ],
+        "tags": [
+          "pwa",
+          "mobile",
+          "offline"
+        ],
+        "acceptance_criteria": [
+          "App installable on mobile devices",
+          "Offline functionality for core features",
+          "Push notifications working",
+          "Touch-optimized interface"
+        ],
+        "implementation_details": "Implement service worker, add offline storage with IndexedDB, create push notification system, optimize for mobile touch",
+        "test_strategy": "Offline testing, push notification testing, mobile device testing across platforms",
+        "technical_notes": "Use Workbox for service worker, implement background sync, optimize for Core Web Vitals"
+      },
+      {
+        "id": "10",
+        "title": "Advanced Search & Filtering System",
+        "description": "Intelligent search with filters, saved searches, and semantic search capabilities",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 7,
+        "estimatedHours": 14,
+        "category": "search",
+        "dependencies": [
+          "4",
+          "5"
+        ],
+        "tags": [
+          "search",
+          "filters",
+          "semantic"
+        ],
+        "acceptance_criteria": [
+          "Global search across all entities",
+          "Advanced filtering interface",
+          "Saved search functionality",
+          "Semantic search capabilities"
+        ],
+        "implementation_details": "Implement full-text search with PostgreSQL, create filter UI components, add vector search for semantic queries",
+        "test_strategy": "Search accuracy testing, performance testing with large datasets, semantic search validation",
+        "technical_notes": "Use PostgreSQL full-text search, implement vector embeddings with Supabase Vector"
+      },
+      {
+        "id": "11",
+        "title": "Workflow Automation Engine",
+        "description": "Visual workflow builder with triggers, conditions, and automated actions",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 9,
+        "estimatedHours": 22,
+        "category": "automation",
+        "dependencies": [
+          "6",
+          "8"
+        ],
+        "tags": [
+          "automation",
+          "workflows",
+          "triggers"
+        ],
+        "acceptance_criteria": [
+          "Visual workflow builder interface",
+          "Trigger-based automation working",
+          "Conditional logic support",
+          "Workflow analytics and monitoring"
+        ],
+        "implementation_details": "Build drag-and-drop workflow editor, implement trigger system, create action library, add workflow execution engine",
+        "test_strategy": "Workflow execution testing, trigger accuracy testing, performance under load",
+        "technical_notes": "Use state machine pattern, implement queue system for workflow execution"
+      },
+      {
+        "id": "12",
+        "title": "Team Collaboration & Permissions",
+        "description": "Team management with granular permissions, collaboration features, and activity sharing",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 7,
+        "estimatedHours": 16,
+        "category": "collaboration",
+        "dependencies": [
+          "2"
+        ],
+        "tags": [
+          "teams",
+          "permissions",
+          "collaboration"
+        ],
+        "acceptance_criteria": [
+          "Granular permission system",
+          "Team member invitation and management",
+          "Activity sharing and commenting",
+          "Role-based data access"
+        ],
+        "implementation_details": "Extend RBAC system, create team management interface, implement commenting system, add activity feeds",
+        "test_strategy": "Permission enforcement testing, collaboration feature testing, access control validation",
+        "technical_notes": "Implement fine-grained permissions, use RLS for data access control"
+      },
+      {
+        "id": "13",
+        "title": "Reporting & Business Intelligence",
+        "description": "Advanced reporting system with custom reports, scheduled delivery, and data exports",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 8,
+        "estimatedHours": 18,
+        "category": "reporting",
+        "dependencies": [
+          "7"
+        ],
+        "tags": [
+          "reports",
+          "bi",
+          "analytics"
+        ],
+        "acceptance_criteria": [
+          "Custom report builder",
+          "Scheduled report delivery",
+          "Multiple export formats",
+          "Report sharing capabilities"
+        ],
+        "implementation_details": "Create report builder interface, implement data aggregation queries, add export functionality, create delivery system",
+        "test_strategy": "Report accuracy testing, export format validation, delivery system testing",
+        "technical_notes": "Use materialized views for performance, implement caching for complex reports"
+      },
+      {
+        "id": "14",
+        "title": "Email Integration & Templates",
+        "description": "Comprehensive email integration with templates, tracking, and automation",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 7,
+        "estimatedHours": 16,
+        "category": "integration",
+        "dependencies": [
+          "6"
+        ],
+        "tags": [
+          "email",
+          "templates",
+          "integration"
+        ],
+        "acceptance_criteria": [
+          "Gmail and Outlook integration",
+          "Email template system",
+          "Email tracking and analytics",
+          "Automated email sequences"
+        ],
+        "implementation_details": "Integrate with email providers, create template editor, implement tracking pixels, add sequence automation",
+        "test_strategy": "Email delivery testing, tracking accuracy testing, template rendering validation",
+        "technical_notes": "Use OAuth for email access, implement webhook handling for email events"
+      },
+      {
+        "id": "15",
+        "title": "Document Management System",
+        "description": "File storage, organization, sharing, and version control for all document types",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 6,
+        "estimatedHours": 14,
+        "category": "documents",
+        "dependencies": [
+          "2"
+        ],
+        "tags": [
+          "documents",
+          "storage",
+          "sharing"
+        ],
+        "acceptance_criteria": [
+          "File upload and storage",
+          "Document organization and folders",
+          "Sharing and permission controls",
+          "Version history tracking"
+        ],
+        "implementation_details": "Use Supabase Storage for files, create folder structure, implement sharing permissions, add version control",
+        "test_strategy": "File upload testing, permission testing, version control validation",
+        "technical_notes": "Use Supabase Storage with CDN, implement file type validation and virus scanning"
+      },
+      {
+        "id": "16",
+        "title": "Performance Optimization & Monitoring",
+        "description": "Comprehensive performance optimization and monitoring system for production readiness",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 8,
+        "estimatedHours": 16,
+        "category": "performance",
+        "dependencies": [
+          "7",
+          "9"
+        ],
+        "tags": [
+          "performance",
+          "monitoring",
+          "optimization"
+        ],
+        "acceptance_criteria": [
+          "Page load times <2s desktop, <3s mobile",
+          "Core Web Vitals in 'Good' range",
+          "Real-time performance monitoring",
+          "Automated performance alerts"
+        ],
+        "implementation_details": "Implement performance monitoring with Sentry and Vercel Analytics, optimize bundle sizes, add caching strategies",
+        "test_strategy": "Performance testing under load, Core Web Vitals monitoring, stress testing",
+        "technical_notes": "Use Lighthouse CI, implement code splitting, optimize images and assets"
+      },
+      {
+        "id": "17",
+        "title": "Third-Party Integrations Hub",
+        "description": "Integration platform with popular business tools and API management",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 8,
+        "estimatedHours": 20,
+        "category": "integrations",
+        "dependencies": [
+          "11"
+        ],
+        "tags": [
+          "integrations",
+          "api",
+          "webhooks"
+        ],
+        "acceptance_criteria": [
+          "Pre-built integrations with major platforms",
+          "Custom webhook support",
+          "API rate limiting and monitoring",
+          "Integration marketplace interface"
+        ],
+        "implementation_details": "Create integration framework, implement OAuth flows, build webhook system, add integration management UI",
+        "test_strategy": "Integration testing with external APIs, webhook delivery testing, rate limiting validation",
+        "technical_notes": "Implement retry logic for webhooks, use queue system for API calls"
+      },
+      {
+        "id": "18",
+        "title": "Data Import/Export System",
+        "description": "Robust data migration tools with support for multiple formats and validation",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 7,
+        "estimatedHours": 14,
+        "category": "data",
+        "dependencies": [
+          "4",
+          "5"
+        ],
+        "tags": [
+          "import",
+          "export",
+          "migration"
+        ],
+        "acceptance_criteria": [
+          "Support for CSV, Excel, and JSON formats",
+          "Data validation and error handling",
+          "Bulk import with progress tracking",
+          "Export with custom field selection"
+        ],
+        "implementation_details": "Create import parser, implement validation rules, add progress tracking, build export system with field mapping",
+        "test_strategy": "Import validation testing, large file handling, error recovery testing",
+        "technical_notes": "Use streaming for large files, implement chunked processing, add duplicate detection"
+      },
+      {
+        "id": "19",
+        "title": "Security Hardening & Compliance",
+        "description": "Enterprise-grade security implementation with SOC 2, GDPR, and HIPAA compliance",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 8,
+        "estimatedHours": 18,
+        "category": "security",
+        "dependencies": [
+          "2"
+        ],
+        "tags": [
+          "security",
+          "compliance",
+          "audit"
+        ],
+        "acceptance_criteria": [
+          "SOC 2 Type II compliance ready",
+          "GDPR compliance with data controls",
+          "Comprehensive audit logging",
+          "Security vulnerability scanning"
+        ],
+        "implementation_details": "Implement comprehensive audit logging, add data retention policies, create privacy controls, conduct security assessments",
+        "test_strategy": "Security penetration testing, compliance validation, audit trail verification",
+        "technical_notes": "Implement encryption at rest and in transit, add security headers, regular vulnerability scans"
+      },
+      {
+        "id": "20",
+        "title": "Testing & Quality Assurance Framework",
+        "description": "Comprehensive testing suite with unit, integration, and end-to-end testing",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 7,
+        "estimatedHours": 16,
+        "category": "testing",
+        "dependencies": [
+          "3",
+          "4",
+          "6"
+        ],
+        "tags": [
+          "testing",
+          "qa",
+          "automation"
+        ],
+        "acceptance_criteria": [
+          ">90% test coverage achieved",
+          "Automated testing pipeline",
+          "End-to-end testing suite",
+          "Performance testing framework"
+        ],
+        "implementation_details": "Set up Vitest for unit tests, React Testing Library for component tests, Playwright for E2E, implement CI/CD testing",
+        "test_strategy": "Test coverage monitoring, automated test execution, cross-browser testing",
+        "technical_notes": "Use GitHub Actions for CI/CD, implement visual regression testing, parallel test execution"
+      },
+      {
+        "id": "21",
+        "title": "Customer Onboarding & Setup Wizard",
+        "description": "Guided onboarding experience with data setup and team configuration",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 6,
+        "estimatedHours": 12,
+        "category": "onboarding",
+        "dependencies": [
+          "2",
+          "12"
+        ],
+        "tags": [
+          "onboarding",
+          "wizard",
+          "setup"
+        ],
+        "acceptance_criteria": [
+          "Multi-step onboarding wizard",
+          "Data import during setup",
+          "Team invitation flow",
+          "Initial configuration guidance"
+        ],
+        "implementation_details": "Create step-by-step wizard interface, integrate data import, add team setup flow, implement progress tracking",
+        "test_strategy": "Onboarding flow testing, data validation during setup, user experience testing",
+        "technical_notes": "Use progressive disclosure, implement form validation, add contextual help"
+      },
+      {
+        "id": "22",
+        "title": "API Documentation & Developer Portal",
+        "description": "Comprehensive API documentation with interactive examples and SDKs",
+        "status": "pending",
+        "priority": "low",
+        "complexity": 5,
+        "estimatedHours": 12,
+        "category": "documentation",
+        "dependencies": [
+          "17"
+        ],
+        "tags": [
+          "api",
+          "documentation",
+          "sdk"
+        ],
+        "acceptance_criteria": [
+          "Interactive API documentation",
+          "Code examples in multiple languages",
+          "SDK for popular languages",
+          "Developer authentication system"
+        ],
+        "implementation_details": "Generate OpenAPI specification, create interactive docs with Swagger UI, build JavaScript SDK, add developer portal",
+        "test_strategy": "API documentation accuracy, SDK functionality testing, developer experience validation",
+        "technical_notes": "Auto-generate docs from code, implement API versioning, provide sandbox environment"
+      },
+      {
+        "id": "23",
+        "title": "Advanced AI Features & Chatbot",
+        "description": "AI-powered assistant with natural language processing and automated insights",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 9,
+        "estimatedHours": 24,
+        "category": "ai-ml",
+        "dependencies": [
+          "8"
+        ],
+        "tags": [
+          "ai",
+          "chatbot",
+          "nlp",
+          "insights"
+        ],
+        "acceptance_criteria": [
+          "AI chatbot for user assistance",
+          "Natural language query processing",
+          "Automated insights and recommendations",
+          "Predictive analytics dashboard"
+        ],
+        "implementation_details": "Integrate Moonshot AI for chatbot, implement NLP for queries, create insights engine, build predictive models",
+        "test_strategy": "AI accuracy testing, chatbot conversation testing, insight validation",
+        "technical_notes": "Use Moonshot API for advanced AI features, implement context awareness, add conversation memory"
+      },
+      {
+        "id": "24",
+        "title": "Deployment & Production Infrastructure",
+        "description": "Production deployment setup with monitoring, scaling, and disaster recovery",
+        "status": "pending",
+        "priority": "high",
+        "complexity": 7,
+        "estimatedHours": 16,
+        "category": "deployment",
+        "dependencies": [
+          "16",
+          "19",
+          "20"
+        ],
+        "tags": [
+          "deployment",
+          "infrastructure",
+          "monitoring"
+        ],
+        "acceptance_criteria": [
+          "Production environment deployed",
+          "Auto-scaling configuration",
+          "Monitoring and alerting system",
+          "Backup and disaster recovery"
+        ],
+        "implementation_details": "Deploy to Vercel with proper environment configuration, set up monitoring with Sentry, implement backup procedures",
+        "test_strategy": "Production deployment testing, load testing, disaster recovery testing",
+        "technical_notes": "Use Vercel Edge Functions, implement CDN caching, set up database backups"
+      },
+      {
+        "id": "25",
+        "title": "Launch Preparation & Go-to-Market",
+        "description": "Final preparation for market launch including documentation, training, and support",
+        "status": "pending",
+        "priority": "medium",
+        "complexity": 6,
+        "estimatedHours": 14,
+        "category": "launch",
+        "dependencies": [
+          "21",
+          "22",
+          "24"
+        ],
+        "tags": [
+          "launch",
+          "documentation",
+          "training"
+        ],
+        "acceptance_criteria": [
+          "User documentation complete",
+          "Training materials created",
+          "Support system in place",
+          "Launch marketing materials ready"
+        ],
+        "implementation_details": "Create user guides, build help system, set up customer support tools, prepare launch materials",
+        "test_strategy": "Documentation accuracy testing, support workflow testing, user acceptance testing",
+        "technical_notes": "Implement in-app help system, create video tutorials, set up knowledge base"
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "project": "Carousel CRM",
+      "description": "Enterprise-grade CRM system targeting $50M ARR by Year 3",
+      "totalTasks": 25,
+      "createdAt": "2025-01-17T23:00:00Z",
+      "lastUpdated": "2025-01-17T23:00:00Z"
+    }
+  }
+}
