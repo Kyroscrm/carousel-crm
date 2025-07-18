@@ -9,7 +9,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.9.1",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
     "@radix-ui/react-aspect-ratio": "latest",
@@ -43,7 +46,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "latest",
-    "date-fns": "4.1.0",
+    "date-fns": "^4.1.0",
     "embla-carousel-react": "latest",
     "input-otp": "latest",
     "lucide-react": "^0.454.0",
@@ -52,7 +55,7 @@
     "react": "^19",
     "react-day-picker": "latest",
     "react-dom": "^19",
-    "react-hook-form": "latest",
+    "react-hook-form": "^7.60.0",
     "react-resizable-panels": "latest",
     "recharts": "latest",
     "serwist": "latest",
@@ -60,7 +63,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "latest",
-    "zod": "^3.24.1"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^22",
