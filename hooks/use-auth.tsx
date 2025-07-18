@@ -142,22 +142,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('Auth state change:', event, session?.user?.id);
+      console.log('🔄 Auth state change:', event, session?.user?.id);
       setSession(session);
 
       if (session?.user) {
+        console.log('👤 User session found, loading profile...');
         await loadUserProfile(session.user);
       } else {
+        console.log('❌ No user session, clearing user state');
         setUser(null);
+        setLoading(false);
       }
-
-      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
   }, []);
 
   const loadUserProfile = async (supabaseUser: SupabaseUser) => {
+    console.log('🔍 Loading profile for user:', supabaseUser.id);
     try {
       let { data: profile, error } = await supabase
         .from('profiles')
@@ -174,6 +176,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         )
         .eq('id', supabaseUser.id)
         .single();
+
+      console.log('📊 Profile query result:', { profile, error });
 
       // If profile doesn't exist, create one
       if (error && error.code === 'PGRST116') {
@@ -270,7 +274,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             currency: 'USD',
           },
         };
+        console.log('✅ About to set user data:', userData);
         setUser(userData);
+        console.log('🎉 User data set successfully!');
 
         // Update last login
         await supabase
@@ -279,7 +285,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           .eq('id', supabaseUser.id);
       }
     } catch (error) {
-      console.error('Profile loading error:', error);
+      console.error('❌ Profile loading error:', error);
+    } finally {
+      console.log('🔄 Profile loading completed, setting loading to false');
+      setLoading(false);
     }
   };
 
