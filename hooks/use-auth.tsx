@@ -159,7 +159,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const loadUserProfile = async (supabaseUser: SupabaseUser) => {
     try {
-      const { data: profile, error } = await supabase
+      let { data: profile, error } = await supabase
         .from('profiles')
         .select(
           `
@@ -175,7 +175,44 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .eq('id', supabaseUser.id)
         .single();
 
-      if (error) {
+      // If profile doesn't exist, create one
+      if (error && error.code === 'PGRST116') {
+        console.log('Creating new profile for user:', supabaseUser.id);
+
+        // Create a basic profile for the new user
+        const { data: newProfile, error: createError } = await supabase
+          .from('profiles')
+          .insert({
+            id: supabaseUser.id,
+            email: supabaseUser.email || '',
+            first_name:
+              supabaseUser.user_metadata?.first_name ||
+              supabaseUser.email?.split('@')[0] ||
+              'User',
+            last_name: supabaseUser.user_metadata?.last_name || '',
+            role: 'member', // Default role
+            is_active: true,
+          })
+          .select(
+            `
+            *,
+            organization:organizations(
+              id,
+              name,
+              plan,
+              domain
+            )
+          `
+          )
+          .single();
+
+        if (createError) {
+          console.error('Error creating profile:', createError);
+          return;
+        }
+
+        profile = newProfile;
+      } else if (error) {
         console.error('Error loading profile:', error);
         return;
       }

@@ -47,7 +47,7 @@
         "id": "3",
         "title": "Visual Deal Pipeline System",
         "description": "Create drag-and-drop visual pipeline with real-time updates and forecasting",
-        "status": "pending",
+        "status": "done",
         "priority": "high",
         "complexity": 9,
         "estimatedHours": 20,
